@@ -25,3 +25,6 @@ This project is about Contact Manager, we can perform 5 function. Such as Adding
 
 ![1576229886857](https://user-images.githubusercontent.com/58845015/70791055-df957480-1dc8-11ea-874d-c53b506aee19.jpg)
 
+You can save the contact after we done with the program. The contactdatabase.dat will be modified after each change, and if we start the program again the file will be continued from latest change.
+
+![1576231042609](https://user-images.githubusercontent.com/58845015/70791577-f092b580-1dc9-11ea-8a76-4cceea6e6b80.jpg)
