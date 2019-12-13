@@ -11,45 +11,39 @@ int prompt(void);
 int findnum (int);
 
 typedef struct contact {   
-    int number;        /*unique account number*/
-    char name [20];     /*contains name*/  
-    char phone[15];    /*contains phone number*/
+    int number;        
+    char name [20];      
+    char phone[15];    
     char email[20];  
-	char address[20];         /*contains email address*/
-    struct contact *next; /*next is used to navigate through structures.*/ 
-    int count;     /*count is used to input comments into array*/    
+    char address[20];   
+    struct contact *next;  
+    int count;      
     } Contact;
-Contact *firstc,*currentc,*newc; /*pointers*/
-/* 
-- firstc is used to point to first record in list
-- currentc points to current record in list
-- newc contains address of new structure/node 
-*/
-int cnum = 0; /*gives unique account numbers*/
+Contact *firstc,*currentc,*newc; 
+int cnum = 0;
 int main()
 {
     FILE *datafile;
-    char *filename = "contactdatabase.dat";/*declare file name*/
+    char *filename = "contactdatabase.dat"; 
     char ch;
     firstc = NULL;
-    datafile = fopen(filename,"r");/* open file for reading*/
+    datafile = fopen(filename,"r");
     
     if(datafile)	 
     {
 	    firstc = (struct contact *)malloc(sizeof(struct contact));
-    /*use of malloc to set aside memory relative to size of structure contact*/
-	    currentc = firstc;       /*make first record current*/
-	    while(1) /*endless while loop. a NULL pointer in final node ends loop*/
+	    currentc = firstc;       
+	    while(1) 
      	    {
 		    newc = (struct contact *)malloc(sizeof(struct contact));
 		    fread(currentc,sizeof(struct contact),1,datafile);
-		    if(currentc->next == NULL)   /* NULL indicates end of node list*/
-			    break;
-		    currentc->next = newc;       /* pointer referencing next node*/
-            currentc->count=0;           /* initiates count for comments*/
-		    currentc = newc;             /* make current record new*/
+		    if(currentc->next == NULL)   
+			 break;
+		    currentc->next = newc;       
+            	    currentc->count=0;           
+		    currentc = newc;            
 	    }
-	    fclose(datafile);                /* close file - good practice to cloe files after use*/
+	    fclose(datafile);               
 	    cnum = currentc->number;         
         
     }
@@ -57,7 +51,7 @@ int main()
     do
     {
 	fflush(stdin);
-        puts("\nWelcome To The Contact Database");/* print menu messages*/
+        puts("\nWelcome To The Contact Database");
         puts("-- -----------------------------");
         puts("1 - Add a new contact");     
 		puts("2 - Delete contact");          
@@ -68,26 +62,26 @@ int main()
         puts("Q - Save and quit\n");         
         printf("\tYour choice:");            
         ch = getchar();
-	    ch = toupper(ch);/*changes user input case to upper case*/
-        switch(ch)     /*stores in ch variable.*/
+	    ch = toupper(ch);
+        switch(ch)     
         {
             case '1':
                 puts("Add a new contact\n");
-	    		fflush(stdin);
-                addNewcontact();//call addNewcontact function 
+	    	fflush(stdin);
+                addNewcontact();
                 break;
-	    	case '2':
-				puts("Delete a contact\n");
-				deletecontact();
-				break;
-	    	case '3':
-				puts("List all contacts\n");
-				listAll();
-				break;
-	    	case '4':
-				puts("Modify a contact\n");
-				modifycontact();
-				break;
+	    case '2':
+		puts("Delete a contact\n");
+		deletecontact();
+		break;
+	    case '3':
+		puts("List all contacts\n");
+		listAll();
+		break;
+    	    case '4':
+		puts("Modify a contact\n");
+		modifycontact();
+		break;
 	    case '5':
 		puts("Find a contact by name\n");
 		findcontact();
@@ -99,52 +93,42 @@ int main()
         }
     }
     while(ch != 'Q');
-/* Save the records to disk*/
     currentc = firstc;
     
     if(currentc == NULL)
-	    return(0);		/*no data to write*/
+	    return(0);		
 				  
-    datafile = fopen(filename,"w");   /*open file to write*/
+    datafile = fopen(filename,"w");   
     
     if(datafile == NULL)
     {
 	    printf("Error writing to %s\n",filename);
 	    return(1);
     }
-    				/* Write each record to disk*/ 
     while(currentc != NULL)
     {
 	    fwrite(currentc,sizeof(struct contact),1,datafile);
 	    currentc = currentc->next;
     }
-    fclose(datafile);             /*closes data file*/
+    fclose(datafile);             
     return(0);
 }
-void addNewcontact(void) /* add new contact function*/
+void addNewcontact(void) 
 {
     newc = (struct contact *)malloc(sizeof(struct contact)); 
-    /*allocates memory for new structure.*/
-/*
- - Checks to see whether this is the first record in file
- - If so, then all pointers are initialized to this record,
- */
     if(firstc==NULL)
         firstc = currentc = newc;
-/* if not, end of structure list is obtained*/
+
     else
     {
-        currentc = firstc;      /* make the first record the current one*/ 
-                                
+        currentc = firstc;                
         while(currentc->next != NULL)currentc = currentc->next;
-                                /* and loop through all records*/ 
-        currentc->next = newc;  /* pointer to next node */
-        currentc = newc;        /* make current record the new one*/ 
+        currentc->next = newc; 
+        currentc = newc;  
     }
-/* update the struct */
     cnum++;
     printf("%27s: %5i\n","contact number",cnum);
-    currentc->number = cnum;    /*cnum is used to give account numbers*/
+    currentc->number = cnum;    
     
     printf("%27s: ","Enter contact name");
     gets(currentc->name);
@@ -157,40 +141,33 @@ void addNewcontact(void) /* add new contact function*/
     
     printf("contact added!");
     currentc->count=0;
-/* 
- - gives the new record a NULL pointer
- - to show it's the last record:
- */
     currentc->next = NULL;
 }
-void listAll(void) /* list all contacts function*/
+void listAll(void)
 {
     if(firstc==NULL)
         puts("There are no contacts to display!"); 
         
     else
     {
-	    printf("%6s %-20s %-15s %-15s %-15s\n","Acct#","Name","Phone","Email","Address");
+	printf("%6s %-20s %-15s %-15s %-15s\n","Acct#","Name","Phone","Email","Address");
         puts("------ -------------------- ------------- -------------------");           
         currentc=firstc;
         
         do
         {
-        
                 printf("%6d: %-20s %-15s %-20s %-20s\n",\
                 currentc->number,\
                 currentc->name,\
                 currentc->phone,\
                 currentc->email,\
-                currentc->address);
-                
-                /*prints values of number, name, phone and email,address*/
+                currentc->address);        
         }
         
         while((currentc=currentc->next) != NULL);
     }
 }
-void deletecontact(void)     /*delete contact function */          
+void deletecontact(void)          
 {
     int record;
     struct contact *previousa;
@@ -200,7 +177,7 @@ void deletecontact(void)     /*delete contact function */
 	return;
     }
     
-    listAll();		/* show all records*/  
+    listAll();		  
     printf("Enter contact account number to delete: ");
     scanf("%d",&record);
     currentc = firstc;
@@ -209,12 +186,12 @@ void deletecontact(void)     /*delete contact function */
     {
         if(currentc->number == record)
 	{
-	    if(currentc == firstc)	/*if record to be deleted is the first record*/
-		firstc=currentc->next; /*reset firstc to point at next record as first*/
-	    else
-		previousa->next = currentc->next;/*previous pointer used if record*/ 
-        free(currentc); /*frees memory <deletes>*/
-	    printf("contact %d deleted!\n",record);
+	if(currentc == firstc)	
+		firstc=currentc->next; 
+	else
+		previousa->next = currentc->next;
+        	free(currentc);
+	    	printf("contact %d deleted!\n",record);
 	    return;
 	}
 	
@@ -226,7 +203,7 @@ void deletecontact(void)     /*delete contact function */
     }
     printf("contact %d not found!\n",record);
  }
-void modifycontact(void)   /*modify contact function*/
+void modifycontact(void)  
 {
     int record, result;
     if(firstc==NULL)
@@ -235,9 +212,9 @@ void modifycontact(void)   /*modify contact function*/
 	return;
     }
     
-    listAll();		/* show all records */
+    listAll();		
     printf("Enter contact account number to modify or change: ");
-    scanf("%d",&record);  /*scan user input to record*/
+    scanf("%d",&record);
     result = findnum(record);
     
     if( result >0 ){
@@ -278,7 +255,7 @@ int findnum (int recordnum)
     }
     return -1;   
 }
-int findcontact(void) /* find contact function*/
+int findcontact(void)
 {
      char buff[20];
      
@@ -289,7 +266,7 @@ int findcontact(void) /* find contact function*/
     }
     
     printf("Enter contact name: ");
-    fflush(stdin);/*clears any text from the input stream*/
+    fflush(stdin);
     gets(buff);
     
     currentc = firstc;
@@ -297,16 +274,13 @@ int findcontact(void) /* find contact function*/
     {
         if( strcmp(currentc->name, buff) == 0 )
 	    {
-			printf("%6s %-20s %-15s %-15s\n","Acct#","Name","Phone","Email");
-			/*prints table titles*/
+	    printf("%6s %-20s %-15s %-15s\n","Acct#","Name","Phone","Email");
             printf("%6d: %-20s %-15s %-20s %-20s \n",\
             currentc->number,\
             currentc->name,\
             currentc->phone,\
             currentc->email,\
-            currentc->address);
-            /*prints values of number, name, phone and email*/
-			
+            currentc->address);			
 			return 0;
 	    }
 		else
@@ -320,7 +294,7 @@ int findcontact(void) /* find contact function*/
 int prompt(void)
 {
 	char ch;
-    fflush(stdin);
+    	fflush(stdin);
 	printf("Update? (Y to update any other key to not)");
 	ch = getchar();
 	ch = toupper(ch);
