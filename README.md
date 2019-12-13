@@ -7,15 +7,21 @@ This project is about Contact Manager, we can perform 5 function. Such as Adding
 
 1. Adding a New Contact Function
 
+![1576229722163](https://user-images.githubusercontent.com/58845015/70790891-862d4580-1dc8-11ea-93d4-3dee1d89ade0.jpg)
 
 2. Deleting a Contact
 
+![1576229917604](https://user-images.githubusercontent.com/58845015/70791092-f8058f00-1dc8-11ea-84d9-800f22b9ac00.jpg)
 
 3. Listing All Registrated Contact
 
+![1576229793127](https://user-images.githubusercontent.com/58845015/70790974-b1b03000-1dc8-11ea-9462-236b31a8fa6f.jpg)
 
 4. Modifying a Contact
 
-
+![1576229851698](https://user-images.githubusercontent.com/58845015/70791032-d0162b80-1dc8-11ea-88a8-1a73108f8232.jpg)
 
 5. Finding a Contact By Name
+
+![1576229886857](https://user-images.githubusercontent.com/58845015/70791055-df957480-1dc8-11ea-874d-c53b506aee19.jpg)
+
