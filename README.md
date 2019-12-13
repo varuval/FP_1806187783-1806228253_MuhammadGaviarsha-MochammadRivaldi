@@ -2,7 +2,7 @@
 
 This project is about Contact Manager, we can perform 5 function. Such as Adding a New Contact, Deleting a contact, Listing all registrated contact, Modifying a contact, and finding a contact by name. The project use linked list as basic structure of the program.
 
-The struct function as the content on the contact, the struct is used so we can modify the linked list easier. The struct in this program is using char because its using the character. 
+The struct function as the content on the contact, the struct is used so we can modify the linked list easier. The struct in this program is using char because its using the character. and struct contact*next is used to navigate through structures
 
 ![1576229573224](https://user-images.githubusercontent.com/58845015/70790601-02735900-1dc8-11ea-8749-11e3001d920d.jpg)
 
