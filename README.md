@@ -5,16 +5,19 @@ This project is about Contact Manager, we can perform 5 function. Such as Adding
 The struct function as the content on the contact, the struct is used so we can modify the linked list easier. The struct in this program is using char because its using the character. 
 
 ![1576229573224](https://user-images.githubusercontent.com/58845015/70790601-02735900-1dc8-11ea-8749-11e3001d920d.jpg)
+
 so in this program we using switch case for directing the menu into 5 category and after we done with the program press Q to save and exit.
 
 1. Adding a New Contact Function
 
 ![1576229722163](https://user-images.githubusercontent.com/58845015/70790891-862d4580-1dc8-11ea-93d4-3dee1d89ade0.jpg)
+
 in this function we first allocate the memory for the linked list, the memory is dynamic according to the size of linked list and after that we use linked list to add the name, phone number, email and address of the contact. If the contact is successfully added it will show the text "contact added!"
 
 2. Deleting a Contact
 
 ![1576229917604](https://user-images.githubusercontent.com/58845015/70791092-f8058f00-1dc8-11ea-84d9-800f22b9ac00.jpg)
+
 In delete contact function, first we check if there are any contact in the file. If there are no contact it will show the text "There are no contact to delete!", and if there are any contact it will check the currentc variable then delete based on the number of the contact that we want to remove.
 
 3. Listing All Registrated Contact
